@@ -9,6 +9,7 @@ import { transactionDisputeRoutes, disputeRoutes } from './routes/disputes';
 import { errorHandler } from './middleware/errorHandler';
 import { connectRedis } from './config/redis';
 import { globalTimeout, haltOnTimedout, timeoutErrorHandler } from './middleware/timeout';
+import { responseTime } from './middleware/responseTime';
 
 dotenv.config();
 
@@ -27,6 +28,7 @@ app.use(express.json());
 app.use(limiter);
 
 // Global timeout configuration
+app.use(responseTime);
 app.use(globalTimeout);
 app.use(haltOnTimedout);
 
