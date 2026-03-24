@@ -8,6 +8,7 @@ import { bulkRoutes } from './routes/bulk';
 import { errorHandler } from './middleware/errorHandler';
 import { connectRedis } from './config/redis';
 import { globalTimeout, haltOnTimedout, timeoutErrorHandler } from './middleware/timeout';
+import { startJobs } from './jobs/scheduler';
 
 dotenv.config();
 
@@ -52,4 +53,5 @@ connectRedis()
 
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
+  startJobs();
 });
